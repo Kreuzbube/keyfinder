@@ -22,13 +22,13 @@ public class Crawler {
 	
 	public void crawl(int id) throws IOException {
 		
-	int starterId=1088757;	
+	int starterId=id;	
 	// Durchläuft die ersten hundert Posts
-	for(int b=0;b<10;b++){
+	for(int b=0;b<1000;b++){
     URL url;
 
 
-			url = new URL("http://pr0gramm.com/api/items/info?itemId="+(id - b));
+			url = new URL("http://pr0gramm.com/api/items/info?itemId="+(starterId - b));
 		 String bla;
 		
    
@@ -48,7 +48,7 @@ for(int i=0; i <arr.length();i++){
 	  
 	     while (m.find()) {
 	    	 if(isKey(m.group())){
-	       System.out.println(m.group() +" in post number: " +(id-b));
+	       System.out.println(m.group() +" in post number: " +(starterId-b));
 	    	 }
 	    	 x++;
 	     }
@@ -104,15 +104,16 @@ for(int i=0; i <arr.length();i++){
 	}
 
 	boolean uniBlockLength(String possibleKey){
-		
-		String[] pkeyBlocks=new String[10]; 
+		int count = possibleKey.length() - possibleKey.replace("-", "").length()+1;
+		String[] pkeyBlocks=new String[count]; 
 		pkeyBlocks = possibleKey.split("-");	
-		int count = possibleKey.length() - possibleKey.replace("-", "").length();
-		for(;count>1;count--){
-			if(pkeyBlocks[count-2]==pkeyBlocks[count-1]){}
-			else{
-			return false;}
-		}
+		int lenght =pkeyBlocks[0].length();
+		for(String cherry:pkeyBlocks)
+		if (cherry.length()== lenght){
+			
+		}else
+		{return false;}
+		
 		
 		
 		return true;
