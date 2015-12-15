@@ -50,6 +50,9 @@ for(int i=0; i <arr.length();i++){
 	    	 if(isKey(m.group())){
 	       System.out.println(m.group() +" in post number: " +(starterId-b));
 	    	 }
+	    	 else{
+	    		 System.out.println("Keine Keys in post: "+(starterId-b));
+	    	 }
 	    	 x++;
 	     }
 	
