@@ -28,7 +28,7 @@ public class Crawler {
     URL url;
 
 
-			url = new URL("http://pr0gramm.com/api/items/info?itemId="+("992706"));
+			url = new URL("http://pr0gramm.com/api/items/info?itemId="+(id-b));
 		 String bla;
 		
    
@@ -39,7 +39,7 @@ public class Crawler {
 JSONObject obj = new JSONObject(bla);
 JSONArray arr = obj.getJSONArray("comments");
 //Pattern für Steam und 
-Pattern p= Pattern.compile("\\w{3,6}-\\w{3,6}-\\w{3,6}-\\w{3,6}-?\\w{0,6}|\\w{3,6}-\\w{3,6}-\\w{3,6}");
+Pattern p= Pattern.compile("[([A-Z]|\\d)]{3,6}-[([A-Z]|\\d)]{3,6}-[([A-Z]|\\d)]{3,6}-?[([A-Z]|\\d)]{0,6}-?[([A-Z]|\\d)]{0,6}-?[([A-Z]|\\d)]{0,6}-?[([A-Z]|\\d)]{0,6}");
 int x=0;
 int a= arr.length();
 for(int i=0; i <arr.length();i++){
