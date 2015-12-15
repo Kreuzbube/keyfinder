@@ -1,6 +1,9 @@
+package KeyFinder.keyfinder;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -9,6 +12,7 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.codec.binary.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,11 +24,11 @@ public class Crawler {
 		
 	int starterId=id;	
 	// Durchläuft die ersten hundert Posts
-	for(int b=0;b<100;b++){
+	for(int b=0;b<10;b++){
     URL url;
 
 
-			url = new URL("http://pr0gramm.com/api/items/info?itemId="+(id-b));
+			url = new URL("http://pr0gramm.com/api/items/info?itemId="+("992706"));
 		 String bla;
 		
    
@@ -35,23 +39,25 @@ public class Crawler {
 JSONObject obj = new JSONObject(bla);
 JSONArray arr = obj.getJSONArray("comments");
 //Pattern für Steam und 
-Pattern p= Pattern.compile("\\w{3,6}-\\w{3,6}-\\w{3,6}-\\w{3,6}-?\\w{0,6}s|\\w{3,6}-\\w{3,6}-\\w{3,6}");
+Pattern p= Pattern.compile("\\w{3,6}-\\w{3,6}-\\w{3,6}-\\w{3,6}-?\\w{0,6}|\\w{3,6}-\\w{3,6}-\\w{3,6}");
 int x=0;
 int a= arr.length();
 for(int i=0; i <arr.length();i++){
 	String comment = arr.getJSONObject(i).getString("content");
 	  Matcher m = p.matcher(comment);
-
+	  
 	     while (m.find()) {
-	       System.out.println(m.group() +" in post number: " +(id-b));
-	       x++;
+	    	 if(isKey(m.group())){
+	       System.out.println(m.group() +" in post number: " +("992706"));
+	    	 }
+	    	 x++;
 	     }
 	
    
 
 } 
-if(x==0)
-	System.out.println("No Key found in post: " +(id-b));
+//if(x==0)
+	//System.out.println("No Key found in post: " +(id-b));
 		
 	}}
 	
@@ -86,4 +92,29 @@ if(x==0)
 		}
 	    return result.toString();
 	}
-}
+
+	boolean isKey(String possibleKey){
+
+		String pkey= possibleKey.replace("-", "");
+		if(pkey.length() == 13 |pkey.length()==15|pkey.length()==18|pkey.length()==25 && uniBlockLength(possibleKey))
+			return true;
+		else
+		return false;
+
+	}
+
+	boolean uniBlockLength(String possibleKey){
+		
+		String[] pkeyBlocks=new String[10]; 
+		pkeyBlocks = possibleKey.split("-");	
+		int count = possibleKey.length() - possibleKey.replace("-", "").length();
+		for(;count>1;count--){
+			if(pkeyBlocks[count-2]==pkeyBlocks[count-1]){}
+			else{
+			return false;}
+		}
+		
+		
+		return true;
+		
+	}}
