@@ -22,13 +22,13 @@ public class Crawler {
 	
 	public void crawl(int id) throws IOException {
 		
-	int starterId=id;	
+	int starterId=1088757;	
 	// Durchläuft die ersten hundert Posts
 	for(int b=0;b<10;b++){
     URL url;
 
 
-			url = new URL("http://pr0gramm.com/api/items/info?itemId="+(id-b));
+			url = new URL("http://pr0gramm.com/api/items/info?itemId="+(id - b));
 		 String bla;
 		
    
@@ -48,7 +48,7 @@ for(int i=0; i <arr.length();i++){
 	  
 	     while (m.find()) {
 	    	 if(isKey(m.group())){
-	       System.out.println(m.group() +" in post number: " +("992706"));
+	       System.out.println(m.group() +" in post number: " +(id-b));
 	    	 }
 	    	 x++;
 	     }
@@ -96,7 +96,7 @@ for(int i=0; i <arr.length();i++){
 	boolean isKey(String possibleKey){
 
 		String pkey= possibleKey.replace("-", "");
-		if(pkey.length() == 13 |pkey.length()==15|pkey.length()==18|pkey.length()==25 && uniBlockLength(possibleKey))
+		if((pkey.length() == 16 |pkey.length() == 12 |pkey.length() == 13 |pkey.length()==15|pkey.length()==18|pkey.length()==25 | pkey.length() == 20) && uniBlockLength(possibleKey))
 			return true;
 		else
 		return false;
